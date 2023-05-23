@@ -1,6 +1,6 @@
 import React from "react";
 
-const MiniInput = ({ setChange, name, label,type }) => {
+const InputLarge = ({ setChange, name, label,type }) => {
   const  Styles={
     "input":{
         width:'87%',
@@ -14,10 +14,10 @@ const MiniInput = ({ setChange, name, label,type }) => {
 
 
   return (
-    <div className="form-miniSelect">
+    <div className="form-select">
       <label className="label">{label}</label>
       <input  className="miniInput" style={Styles.input} name={name} type={type} onChange={(e) => {setChange(e.target.value);}}/>
     </div>
   );
 };
-export default MiniInput;
+export default InputLarge;

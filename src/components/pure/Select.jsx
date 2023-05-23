@@ -1,22 +1,28 @@
-import React, { useState } from "react";
-import './Select.css'
+import React from "react";
+import "./Select.css";
 
-const Select = ({nombrecito,n1,n2,n3,n4,n5}) => {
-  const [values, setValues] = useState("");
-  function handleChange(event) {
-    setValues(event.target.value);
-    console.log(values);
-  }
+const Select = ({
+  name,
+  initialValue,
+  setChange,
+  label,
+  data,
+  keyValue
+
+}) => {
+ 
 
   return (
     <div className="form-select">
-      <label className="label">{nombrecito}</label>
-      <select className="select" onChange={handleChange}>
-        <option>Selecione  {nombrecito}</option>
-        <option>{n1}</option>
-        <option>{n2}</option>
-        <option>{n3}</option>
-        <option>{n4}</option>
+      <label className="label">{label}</label>
+      <select name={name} className="select" onChange={(e) => {setChange(e.target.value);}}>
+        <option>{initialValue}</option>
+        {data && data.map((x) => (
+            <option key={x} value={x[ `${keyValue}` ]}>
+              {x}
+            </option>
+          ))}
+
       </select>
     </div>
   );

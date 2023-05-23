@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import './SmallSelect.css'
 
-const SmallSelect = ({nombrecito,n1,n2,n3,n4,n5}) => {
-  const [values, setValues] = useState("");
-  function handleChange(event) {
-    setValues(event.target.value);
-    console.log(values);
-  }
+const SmallSelect = ({ name,
+  initialValue,
+  keyValue,
+  keyText,
+  setChange,
+  data,
+  label
+ }) => {
+  
 
   return (
     <div className="form-miniSelect">
-      <label className="label">{nombrecito}</label>
-      <select className="miniSelect" onChange={handleChange}>
-        <option></option>
-        <option>{n1}</option>
-        <option>{n2}</option>
-        <option>{n3}</option>
-        <option>{n4}</option>
+      <label className="label">{label}</label>
+      <select name={name} className="select" onChange={(e) => {setChange(e.target.value);}}>
+        <option>{initialValue}</option>
+        {data && data.map((x,index) => (
+            <option key={x} value={x}>
+              {x}
+            </option>
+          ))}
+
       </select>
     </div>
   );

@@ -9,9 +9,9 @@ const Urbanizaciones = () => {
   return (
     <div className="container">
       <h1>Urbanizaciones</h1>
-      <div className="card">
+      {/* <div className="card">
         <LocationSelects/>
-      </div>
+      </div> */}
       <div className="card">
         <Adress/>
       </div>
