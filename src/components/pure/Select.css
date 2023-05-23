@@ -1,0 +1,23 @@
+.form-select{
+    width: 250px;
+    height: 50px;
+    display: grid;
+    margin:25px;
+    color: #434343;
+    border: 1px solid var(--darkgrey);
+    border-radius: 5px;
+}
+
+.select{
+    width: 95%;
+    height: 30px;
+    border: none;
+    font-family: CronosBold;
+    color: var(--darkgrey);
+    outline: none;
+    margin-left: 2px;
+    
+}
+.label{
+    margin-left: 4px;
+}

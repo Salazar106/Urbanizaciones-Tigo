@@ -1,0 +1,22 @@
+.container {
+
+    color:var(--textBlue);
+    width: 100%;
+    box-shadow: 5px 3px 3px 2px #0004;
+    width: 100%;
+    min-height: 500px;
+    border-radius: 15px;
+    background-color: var(--white);
+
+    
+}
+
+h1{
+    text-align: center;
+}
+
+.card{
+    background-color: var(--white);
+    border-radius: 15px;
+}
+

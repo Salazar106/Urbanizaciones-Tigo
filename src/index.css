@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +10,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* @font-face {
+  font-family: RobotoRegular;
+  src: url(/fonts/ROBOTO/Roboto-Regular.ttf);
+} */
+
+@font-face {
+  font-family: CronosBold;
+  src: url(/src/fonts/CRONOS/CronosPro-Bold.otf);
+}
+:root {
+  --midBlue: #002b8c; 
+
+  --darkgrey: #7d7d7d;
+
+  --textBlue: #001950;
+
+  --white: #fff;
+
+  --lightGrey: #f7f7f7;
+
+  --lightBlue: #00c8fa;
 }
