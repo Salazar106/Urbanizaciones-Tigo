@@ -1,0 +1,19 @@
+.buscador {
+    display: flex;
+    justify-content: center;
+}
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    color: var(--textBlue);
+    width: 100%;
+    box-shadow: 5px 3px 3px 2px #0004;
+    min-height: 500px;
+    border-radius: 15px, ;
+    background-color: var(--white);
+}
+

@@ -1,0 +1,9 @@
+.inputs{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left:30px ;
+}
+
+.tittles{
+    padding: 50px;  
+}

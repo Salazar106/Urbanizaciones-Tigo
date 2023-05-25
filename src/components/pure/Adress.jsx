@@ -1,159 +1,189 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "./Select";
 import "./Adress.css";
-import './SmallSelect.css'
-import MiniInput from './InputNumber'
+import "./SmallSelect.css";
+import MiniInput from "./InputNumber";
 import InputLarge from "./InputLarge";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { type } from "@testing-library/user-event/dist/type";
+
+
 const Adress = () => {
+  const [regional, setRegional] = useState("");
+  const [departamento, setDepartamento] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [tvias, setTvias] = useState("");
+  const [N1, setNumero1] = useState("");
+  const [N2, setNumero2] = useState("");
+  const [N3, setNumero3] = useState("");
+  const [inmueble, setInmueble] = useState("");
+  const [TipoUniRecidencial, setTipoUniRecidencial] = useState([]);
+  const [nombreInmueble, setNombreInmueble] = useState("");
+  const [regionales,setRegionales]=useState([])
+  const [departamentos,setDepartamentos]=useState([])
+  const [ciudades, setCiudades] = useState([]);
+  const [barrio, setBarrio]=useState('')
 
-const [direccion,setDireccion]=useState('')
-const [tvias,setTvias]=useState('')
 
-const [N1,setNumero1]=useState('')
-const [N2,setNumero2]=useState('')
-const [N3,setNumero3]=useState('')
-
-const [inmueble, setInmueble]=useState('')
-const [complemento, setComplemento]=useState('')
-const [numComplemento, setNumComplement]=useState('')
-const [complemento2, setComplemento2]=useState('')
-const [numComplemento2, setNumComplement2]=useState('')
-const [nombreInmueble, setNombreInmueble]=useState('')
-
-
-  const tipoVias=[
-    "AV",
-    "CL",
-    "CR",
-    "Circular",
-    "DIAG",
-    "TV",
-    "MZ",
-    "Kilometro",
-    'Via'
+  const tipoVias = [
+    {tvia:"AV"},
+    {tvia:"CL"},
+    {tvia:"CR"},
+    {tvia:"Circular"},
+    {tvia:"DIAG"},
+    {tvia:"MZ"},
+    {tvia:"Kilometro"},
+    {tvia:"Via"}
     
-  ]
-  
-  const tiposInmuebles=[
-    "Edificio",
-    "Conjunto recidencial",
-    "Ciudadela",
-    "Conjunto multifamiliar",
-    'Condominio',
-    'Parcelacion',
-    'Sin informacion'
-    
-  ]
-  const complement=[
-    'Bloque',
-    'Casa',
-    'Apartamento',
-    'Torre'
-  ]
-  const complement2=[
-    'Apartamento',
-    'Interior'
-  ]
-
-  const allAdress=new FormData();
-
+  ];
 
   
- const getTipoVia=(tipoVia)=>{
-  setTvias(tipoVia)
- }
-const getNumero1=(N1)=>{
-  setNumero1(N1)
-}
-const getNumero2=(N2)=>{
-  setNumero2(N2)
-}
-const getNumero3=(N2)=>{
-  setNumero3(N2)
-}
+  // const ciudades=['Medellin','Bogota','Cali','Choco','Pereira']
 
-const getInmueble=(x)=>{
-  setInmueble(x)
-}
-const getComplemento=(x)=>{
-  setComplemento(x)
-}
-const getComplemento2=(x)=>{
-  setComplemento2(x)
-}
-const getNumComplement=(x)=>{
-  setNumComplement(x)
-}
-const getNumComplement2=(x)=>{
-  setNumComplement2(x)
-}
-const getNombreInmueble=(x)=>{
-  setNombreInmueble(x)
-}
+  const alertSend = (title, icon, iconColor) => {
+    Swal.fire({
+      position: "center",
+      iconColor: iconColor,
+      icon: icon,
+      title: title,
+      showConfirmButton: true,
+      confirmButtonText: "OK",
+      confirmButtonColor: "",
+      timer:'',
+    });
+  };
+  const getTipoVia = (tipoVia) => {
+    setTvias(tipoVia);
+  };
+  const getNumero1 = (N1) => {
+    setNumero1(N1);
+  };
+  const getNumero2 = (N2) => {
+    setNumero2(N2);
+  };
+  const getNumero3 = (N2) => {
+    setNumero3(N2);
+  };
+  const getInmueble = (x) => {
+    setInmueble(x);
+  };
+  const getNombreInmueble = (x) => {
+    setNombreInmueble(x);
+  };
+  const getRegional=(x)=>{
 
 
+    setDepartamentos(null)
+    setRegional(x)
+    
+    axios.get(`https://test-gestion.amstigo.com.co/urbanizaciones/departamento/${x}`).then(res=>{
+        setDepartamentos(res.data)
+    })
 
+  };
+  const getDepartamento=(x)=>{
+   
+    setDepartamento(x)
+    const formData={
+        Id_Regional:regional,
+        Departamento_Dane:x
+    }
 
-console.log(tvias,N1,'#',N2,"-",N3,complemento,numComplemento,complemento2,numComplemento2,inmueble,nombreInmueble);
+    axios.post('https://test-gestion.amstigo.com.co/urbanizaciones/ciudad',formData).then(res=>{
+      setCiudades(res.data)
+      
+    })
+    
+  };
+  const getCiudad=(x)=>{
+    setCiudad(x)
+  };
+  
+  const getBarrio =(x)=>{
+    setBarrio(x)
+  }
+  
 
-// setDireccion(tvias,N1,prefijo1,cuadrant1,'#',N2,prefijo2,cuadrant2,"-",complemento,numComplemento,complemento2,numComplemento2,nombreInmueble)
+  
+  const handleClick = () => {
+    const newUrbanizacion = new FormData();
+    newUrbanizacion.append("regional", regional);
+    newUrbanizacion.append("departamento", departamento);
+    newUrbanizacion.append("ciudad", ciudad);
+    newUrbanizacion.append("direccion",tvias + " " + N1 + " # " + N2 + " - " + N3 );
+   
+    alertSend((regional+'  //  '+ departamento + '  //  ' + ciudad + '  //  '+ tvias + " " + N1 + " # " + N2 + " - " + N3+'  //  ' ),'success','#00c8fa')
+  };
 
+  useEffect( () => {
+    axios.get('https://test-gestion.amstigo.com.co/urbanizaciones/tipoUnidad').then(resp=>{
+      setTipoUniRecidencial(resp.data)
+    })
+
+    axios.get("https://test-gestion.amstigo.com.co/urbanizaciones/regional").then(res=>{
+      setRegionales(res.data)
+
+    })
+  },[] )
 
 
   return (
-    <>
-      <div className="Adress">
-          <Select  label={'Regional'} name={'regional'} setChange={''}/>
-          <Select  label={'Departamento'} name={'departamento'} setChange={''}/>
-          <Select  label={'Ciudad'} name={'ciudad'} setChange={''}/>
+    <div className="">
+      <h1>Crear Urbanizaciones</h1>
+
+      <div className="container">
+          <div className="Adress">
+        <Select label={"Regional"} data={regionales}initialValue={'Selec. Regional'} name={"regional"} keyValue={'ID'} keyText={'Regional'} setChange={getRegional} />
+        <Select label={"Departamento"} data={departamentos} initialValue={'Selec. Departamento'} name={"departamento"} keyValue={'Departamento_Dane'} keyText={'Departamento_Dane'} setChange={getDepartamento} />
+        <Select label={"Ciudad"} data={ciudades} initialValue={'Selec. Ciudad'} name={"ciudad"} keyValue={'id'} keyText={'Ciudad'} setChange={getCiudad} />
+
+        <Select
+            label={"Tipo de Unidad recidencial"}
+            initialValue={"Selec. tipo unidad recidencial"}
+            name={"Inmueble"}
+            data={TipoUniRecidencial}
+            keyValue={'id'}
+            keyText={'tipo_unidad'}
+            setChange={getInmueble}
+          />
+          <InputLarge
+            name={"NombreConjunto"}
+            label={"Nombre Unidad recidencial"}
+            setChange={getNombreInmueble}
+          />
       </div>
-     
-     <div className="Adress">
 
-        <Select label={"Tipo de via"} data={tipoVias} keyValue={'tipoVia'} name={'tipoVia'} initialValue={'Seleccione Tipo de via'} setChange={getTipoVia}/>
-
-        
-        <InputLarge label={'Numero'} setChange={getNumero1}/>
-
+      <div className="Adress">
+        <Select
+          label={"Tipo de via"}
+          data={tipoVias}
+          keyValue={"tvia"}
+          keyText={"tvia"}
+          name={"tipoVia"}
+          initialValue={"Seleccione Tipo de via"}
+          setChange={getTipoVia}
+        />
+        <InputLarge label={"Numero"} setChange={getNumero1} />
         <h2>#</h2>
-
-        
-
-        <InputLarge label={'Numero'} setChange={getNumero2}/>
-
-
+        <InputLarge label={"Numero"} setChange={getNumero2} />
         <h2>-</h2>
+        <InputLarge name={"Numero"} label={"Numero"} type={"number"} setChange={getNumero3} />
+        <InputLarge name={"barrio"} label={'Barrio'} type={'text'} setChange={getBarrio}/>
+    
 
-        <InputLarge name={'Numero'}label={'Numero'} type={'number'} setChange={getNumero3}/>
-
-        <Select name="" data={complement} initialValue={'Selec. Complemento'} label={'Complemento'} setChange={getComplemento}></Select>
-
-        <MiniInput label={'Numero'} type={'number'} setChange={getNumComplement}/>
-        
-        {complemento==='Bloque' && <>
-        <Select name="" data={complement2} initialValue={'Selec. Complemento'} label={'Complemento'} setChange={getComplemento2}></Select>
-        <MiniInput label={'Numero'} type={'number'} setChange={getNumComplement2}/>
-        </>
-        }
-
-        {complemento==='Torre' && <>
-          <Select name="" data={complement2} initialValue={'Selec. Complemento'} label={'Complemento'} setChange={getComplemento2}></Select>
-          <MiniInput label={'Numero'} type={'number'} setChange={getNumComplement2}/>
-          </>
-        }
-
-        
-      <div className="Adress">
-          <Select label={'Tipo de Unidad recidencial'} initialValue={'Selec. tipo unidad recidencial'} name={'Inmueble'} data={tiposInmuebles} setChange={getInmueble} /> 
-          <InputLarge name={"NombreConjunto"} label={'Nombre Unidad recidencial'}  setChange={getNombreInmueble}/>
+        <div className="Adress">
+          
+        </div>
       </div>
+      <div className="btn-container">
+        <button className="btn-mine" onClick={handleClick}>
+          Guardar
+        </button>
+      </div>
+      </div>
+      
     </div>
-    <div className="btn-container">
-      <button className="btn">Guardar</button>
-
-    </div>
-    </>
-   
   );
 };
 

@@ -18,25 +18,14 @@ h2{
     margin-top: 45px;
 }
 
-.btn{
 
-    width: 130px;
-    height: 35px;
-    border-radius: 5px;
-    border:none;
-    background-color: var(--lightBlue);
-    color:#fff;
-    font-family: CronosBold;
-    font-size: large;
-    cursor: pointer;
-    outline: none;
-
-}
 .btn-container{
     display: flex;
     justify-content: end;
-    padding:40px 100px;
+    padding:40px 20%;
 }
+
+
 
 @media (max-width: 1170px) {
 

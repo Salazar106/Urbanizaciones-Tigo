@@ -2,6 +2,7 @@ import React from "react";
 import "./Select.css";
 
 const Select = ({
+  keyText,
   name,
   initialValue,
   setChange,
@@ -18,8 +19,8 @@ const Select = ({
       <select name={name} className="select" onChange={(e) => {setChange(e.target.value);}}>
         <option>{initialValue}</option>
         {data && data.map((x) => (
-            <option key={x} value={x[ `${keyValue}` ]}>
-              {x}
+            <option key={x[ `${keyValue}` ]} value={x[ `${keyValue}` ]}>
+              {x[ `${keyText}` ]}
             </option>
           ))}
 

@@ -34,3 +34,15 @@ code {
 
   --lightBlue: #00c8fa;
 }
+ .btn-mine{
+  width: 130px;
+  height: 35px;
+  border-radius: 5px;
+  border:none;
+  background-color: var(--lightBlue);
+  color:#fff;
+  font-family: CronosBold;
+  font-size: large;
+  cursor: pointer;
+  outline: none;
+ }
