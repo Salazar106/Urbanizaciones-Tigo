@@ -103,7 +103,7 @@ const Buscador = () => {
 
   return (
     <div className="">
-      <h1>Buscar Urbanizacion</h1>
+      <h1>Buscar Urbanizaciones</h1>
 
       <div className="container">
         <div className="inputs" style={style.inputs}>

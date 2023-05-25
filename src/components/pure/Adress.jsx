@@ -107,13 +107,24 @@ const Adress = () => {
 
   
   const handleClick = () => {
-    const newUrbanizacion = new FormData();
-    newUrbanizacion.append("regional", regional);
-    newUrbanizacion.append("departamento", departamento);
-    newUrbanizacion.append("ciudad", ciudad);
-    newUrbanizacion.append("direccion",tvias + " " + N1 + " # " + N2 + " - " + N3 );
    
-    alertSend((regional+'  //  '+ departamento + '  //  ' + ciudad + '  //  '+ tvias + " " + N1 + " # " + N2 + " - " + N3+'  //  ' ),'success','#00c8fa')
+    const formData={
+      nombre_ur:nombreInmueble,
+      id_tipo_unidad:TipoUniRecidencial,
+      direccion_ur:tvias + " " + N1 + " # " + N2 + " - " + N3,
+      barrio:barrio,
+      id_municipio:ciudad
+    }
+
+    // axios.post('https://test-gestion.amstigo.com.co/urbanizaciones/guardarUnidadResidencial',formData).then(res=>{
+    //   if(res.data){
+    //     alertSend("se guardaron los datos exitosamente",'success','#00c8fa')
+    //   }else{
+
+    //   }
+    // })
+
+    alertSend((nombreInmueble+'  //  '+ inmueble + '  //  ' + ciudad + '  //  '+ formData.direccion_ur + "  //  "+ barrio),'success','#00c8fa')
   };
 
   useEffect( () => {

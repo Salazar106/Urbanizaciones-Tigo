@@ -27,7 +27,7 @@ const UpdateUr=()=>{
       ];
     return(
         <>
-        <h1>Actualizar Urbanizacion</h1>
+        <h1>Actualizar Urbanizaciones</h1>
         <div className="container">
 
             <div className="tittles">
